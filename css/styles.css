@@ -122,9 +122,8 @@ html {
 }
    
 .nav-item {
-    position: relative;
     padding: 32px 0;
-    transition-property:  color;
+    transition-property: color;
     transition-duration: 250ms; 
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -132,27 +131,29 @@ html {
 .nav-item:focus,
 .nav-item:hover {
     color: var(--accent-color);
+
+    
 }
 
-.nav-item::after {
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  top: 50px;
-  left: 0px;
-  content: "";
-  display: inline-block;
-  opacity: 0;  
-  background-color: var(--accent-color);
-  transform: translateY(calc(-50%));
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+.current-link::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    left: 0;
+    bottom: 0;
+    
+    background-color: var(--accent-color);
 
+    transform: translateY(-27%);
+
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.nav-item:hover::after,
-.nav-item:focus::after {
-    transform: translateY(27px);
-    opacity: 1;
+  
+.current-link:hover::after,
+.current-link:focus::after {
+opacity: 1; 
 }
 
 
@@ -204,6 +205,7 @@ html {
  }
 
 .current-link {
+    position: relative;
     color: var(--accent-color);
 } 
 
@@ -246,6 +248,8 @@ html {
     background-color: var(--primary-white-color);
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
+
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal-close-btn {
@@ -263,9 +267,11 @@ html {
 
     transform: translate(50%, -50%);
     border-radius: 50%;
-    background: var(--primary-white-color);
+    background-color: var(--primary-white-color);
     border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
+
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
@@ -409,7 +415,7 @@ html {
     justify-content: space-between;
 }
   
-.about-item {
+.about-work {
     position: relative;
 }
 
@@ -419,7 +425,7 @@ html {
 
 .about-text {
         position: absolute;
-        /* width: 100%; */
+        width: 100%;
         bottom: 0;
         left: 0;
         padding: 27px;
@@ -427,7 +433,7 @@ html {
         font-weight: 700;
         line-height: 16px;
         text-align: center;
-    
+        text-transform: uppercase;
        color: var(--text-color);
        background: rgba(47, 48, 58, 0.8);
       
@@ -577,6 +583,7 @@ html {
 
 .customer-media-icon {
       fill: currentColor;
+      transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1)
         }
  
 
@@ -708,6 +715,7 @@ margin-right: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 24px;
+ box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 
 .card-title {
@@ -729,11 +737,14 @@ margin-right: 10px;
 .card-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+ 
  }
 
 .card-link {
-    margin-right: 30px;
+    right: 30px;
     margin-bottom: 30px; 
+    overflow: hidden;
 }
 
 .card-link:nth-child(3n) {
@@ -745,39 +756,40 @@ margin-right: 10px;
 }
 
 
-.card-item-link {
-    overflow: hidden;
-    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-item-link:hover{
- box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
-}
-
-.thumb {
+.card-item {
     position: relative;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+.card-item:focus,
+.card-item:hover {
+box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+
+
+.card-item:hover .card-overlay {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
+  transform: translate(0);
+  opacity: 1;
 }
 
 .card-overlay {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
     padding: 63px 24px;
     background: rgba(33, 150, 243, 0.9);
     opacity: 0;
-    transform: translateY(100%);
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(50%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+    
 
-.card-overlay:hover {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-.card-item-text {
+    
+ .card-item-text {
         font-weight: 400;
         font-size: 18px;
         line-height: 1.56;
